@@ -1,8 +1,8 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { navItems } from "../config/NavItems";
-import { useTheme } from "../hooks/useTheme";
+import { navItems } from "../../config/NavItems";
+import { useTheme } from "../../hooks/useTheme";
 import { BrandLogo } from "./BrandLogo";
 import { NavLinks } from "./NavLinks";
 import { ThemeToggle } from "./ThemeToggle";
@@ -24,7 +24,11 @@ export const NavBar = () => {
         {/* Desktop Mode: Calls the nav links and the theme toggle button on row */}
         <div className="hidden md:flex items-center gap-1">
           <NavLinks items={navItems} variant="desktop" />
-          <ThemeToggle isDark={isDark} onToggle={toggleTheme} className="ml-4" />
+          <ThemeToggle
+            isDark={isDark}
+            onToggle={toggleTheme}
+            className="ml-4"
+          />
         </div>
 
         {/* Mobile Mode: If the screen is smaller, it shows the toggle menu button to open the nav links */}

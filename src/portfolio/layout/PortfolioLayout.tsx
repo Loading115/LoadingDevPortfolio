@@ -1,14 +1,15 @@
-import { Navigation } from "lucide-react";
 import { Outlet } from "react-router";
-import { NavBar } from "../components/NavBar";
-import { Footer } from "../components/Footer";
+import { NavBar } from "../components/navbar/NavBar";
+import { Footer } from "../components/footer/Footer";
 
 export const PortfolioLayout = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col">
         <NavBar />
-        <Outlet />
+        <main className="flex-1">
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </>

@@ -3,7 +3,7 @@ import { SocialLinks } from "./SocialLinks";
 
 export const Footer = () => {
   return (
-    <footer className="bg-background border-t border-border mt-20 font-sans">
+    <footer className="bg-background border-t border-border font-sans">
       <div className="max-w-7xl mx-auto px-4 md:px-0 py-16">
         {/* Top Section */}
         <div className="grid grid-cols-1 gap-10 mb-10 text-center place-items-center md:grid-cols-[auto_auto] md:justify-center md:gap-x-16 md:text-left md:place-items-start">
