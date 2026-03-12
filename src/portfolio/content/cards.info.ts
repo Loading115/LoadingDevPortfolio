@@ -1,8 +1,4 @@
-import {
-  Code,
-  Flame,
-  Gamepad2,
-} from "lucide-react";
+import { Code, Flame, Gamepad2, Heart, Users, Zap } from "lucide-react";
 import {
   isFeaturedCard,
   type CardData,
@@ -10,6 +6,9 @@ import {
   type StandardCardData,
 } from "@/portfolio/components/card/card.types";
 
+/**
+ * Home section service cards.
+ */
 export const homeCardsData: StandardCardData[] = [
   {
     id: "design",
@@ -37,6 +36,41 @@ export const homeCardsData: StandardCardData[] = [
   },
 ];
 
+/**
+ * About section value cards (compact style).
+ */
+export const aboutCardsData: CardData[] = [
+  {
+    id: "passion",
+    icon: Heart,
+    title: "Pasion",
+    description: "Amo lo que hago y pongo mi corazon en cada proyecto",
+    cardLayout: "small-card",
+    color: "primary",
+  },
+  {
+    id: "innovacion",
+    icon: Zap,
+    title: "Innovacion",
+    description: "Siempre busco nuevas formas de sorprender a los jugadores",
+    cardLayout: "small-card",
+    color: "primary",
+  },
+  {
+    id: "comunidad",
+    icon: Users,
+    title: "Comunidad",
+    description: "Valoro el feedback y la conexion con mi audiencia",
+    cardLayout: "small-card",
+    color: "primary",
+  },
+];
+
+/**
+ * Projects section cards:
+ * - one featured card
+ * - multiple regular project cards
+ */
 export const projectsCardsData: CardData[] = [
   {
     id: "neon-racer-featured",
@@ -118,26 +152,39 @@ export const projectsCardsData: CardData[] = [
   },
 ];
 
+/**
+ * Source of truth for cards grouped by page section.
+ */
 export const cardsBySection = {
   home: homeCardsData,
   projects: projectsCardsData,
+  about: aboutCardsData,
 } as const;
 
 export type CardsSection = keyof typeof cardsBySection;
 
+/**
+ * Returns all cards configured for a specific section.
+ */
 export const getCardsBySection = (section: CardsSection): readonly CardData[] =>
   cardsBySection[section];
 
+/**
+ * Filters out featured cards for grid-only renderers.
+ */
 export const getGridCardsBySection = (
-  section: CardsSection
+  section: CardsSection,
 ): StandardCardData[] =>
   getCardsBySection(section).filter(
-    (card): card is StandardCardData => !isFeaturedCard(card)
+    (card): card is StandardCardData => !isFeaturedCard(card),
   );
 
+/**
+ * Returns an explicit featured card by id, or the first available one.
+ */
 export const getFeaturedCardBySection = (
   section: CardsSection,
-  featuredCardId?: string
+  featuredCardId?: string,
 ): FeaturedCardData | undefined => {
   const cards = getCardsBySection(section);
 

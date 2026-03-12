@@ -3,6 +3,9 @@ import { ProjectCard } from "./ProjectCard";
 import { ServiceCard } from "./ServiceCard";
 import { isProjectCard, type StandardCardData } from "./card.types";
 
+/**
+ * Generic grid renderer for standard and project card collections.
+ */
 type CardsGridProps = {
   cards: StandardCardData[];
   columns?: 1 | 2 | 3;

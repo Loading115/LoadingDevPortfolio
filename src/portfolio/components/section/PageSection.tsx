@@ -17,13 +17,19 @@ const toneClassMap: Record<NonNullable<PageSectionProps["tone"]>, string> = {
   "muted-gradient": "bg-linear-to-b from-muted to-background",
 };
 
-const spacingClassMap: Record<NonNullable<PageSectionProps["spacing"]>, string> = {
+const spacingClassMap: Record<
+  NonNullable<PageSectionProps["spacing"]>,
+  string
+> = {
   hero: "py-12 sm:py-20",
   default: "py-16 sm:py-24",
   compact: "py-16 sm:py-20",
 };
 
-const containerClassMap: Record<NonNullable<PageSectionProps["container"]>, string> = {
+const containerClassMap: Record<
+  NonNullable<PageSectionProps["container"]>,
+  string
+> = {
   "7xl": "max-w-7xl mx-auto",
   "5xl": "max-w-5xl mx-auto",
 };
@@ -41,8 +47,17 @@ export const PageSection = ({
     <>
       {withTopSeparator ? <Separator className="w-full bg-border/70" /> : null}
 
-      <section className={cn("px-4", toneClassMap[tone], spacingClassMap[spacing], className)}>
-        <div className={cn(containerClassMap[container], contentClassName)}>{children}</div>
+      <section
+        className={cn(
+          "px-4",
+          toneClassMap[tone],
+          spacingClassMap[spacing],
+          className,
+        )}
+      >
+        <div className={cn(containerClassMap[container], contentClassName)}>
+          {children}
+        </div>
       </section>
     </>
   );

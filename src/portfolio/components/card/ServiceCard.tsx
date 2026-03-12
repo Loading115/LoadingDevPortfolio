@@ -1,9 +1,12 @@
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import type { StandardCardData } from "./card.types";
+import { isSmallCard, type StandardCardData } from "./card.types";
 
+/**
+ * Shared container styles for default service-card layouts.
+ */
 const serviceCardVariants = cva(
-  "bg-card rounded-lg border border-border p-8 transition-colors transition-shadow hover:shadow-lg",
+  "bg-card rounded-lg border border-border transition-colors transition-shadow",
   {
     variants: {
       tone: {
@@ -14,31 +17,65 @@ const serviceCardVariants = cva(
         left: "text-left",
         center: "text-center",
       },
+      size: {
+        default: "p-8 hover:shadow-lg",
+        small: "p-4 hover:shadow-sm",
+      },
     },
     defaultVariants: {
       tone: "primary",
       align: "left",
+      size: "default",
     },
   }
 );
 
-export const ServiceCard = ({
-  id,
-  icon: Icon,
-  title,
-  description,
-  imageSrc,
-  label,
-  tags,
-  color,
-  cardLayout,
-}: StandardCardData) => {
+/**
+ * Renders all standard non-project cards.
+ * A compact branch is used for "small-card" layout in the About page.
+ */
+export const ServiceCard = (card: StandardCardData) => {
+  const { id, icon: Icon, title, description, imageSrc, label, tags, color, cardLayout } =
+    card;
   const tone = color === "secondary" ? "secondary" : "primary";
   const align = cardLayout === "simple-center" ? "center" : "left";
+  const compactCard = isSmallCard(card);
   const showDescription = cardLayout !== "simple-left" && Boolean(description);
+  const iconToneClass = tone === "secondary" ? "text-secondary" : "text-primary";
 
+  // Compact style used by About value cards (icon + title + short line).
+  if (compactCard) {
+    return (
+      <article
+        data-card-id={id}
+        className="border-0 bg-transparent p-0 shadow-none"
+      >
+        <div className="flex items-start gap-3">
+          {Icon ? (
+            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+              <Icon className={iconToneClass} size={18} />
+            </div>
+          ) : null}
+
+          <div>
+            <h3 className="mb-0.5 text-xl font-bold text-foreground">{title}</h3>
+            {description ? (
+              <p className="text-base leading-relaxed text-muted-foreground">
+                {description}
+              </p>
+            ) : null}
+          </div>
+        </div>
+      </article>
+    );
+  }
+
+  // Default service-card style used in other sections.
   return (
-    <article data-card-id={id} className={serviceCardVariants({ tone, align })}>
+    <article
+      data-card-id={id}
+      className={serviceCardVariants({ tone, align, size: "default" })}
+    >
       {imageSrc ? (
         <img
           src={imageSrc}
@@ -55,10 +92,7 @@ export const ServiceCard = ({
             align === "center" ? "mx-auto" : ""
           )}
         >
-          <Icon
-            className={tone === "secondary" ? "text-secondary" : "text-primary"}
-            size={32}
-          />
+          <Icon className={iconToneClass} size={32} />
         </div>
       ) : null}
 

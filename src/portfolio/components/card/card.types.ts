@@ -1,15 +1,30 @@
 import type { LucideIcon } from "lucide-react";
 
+/**
+ * Visual accent options shared by card components.
+ */
 export type CardColor = "primary" | "secondary";
+
+/**
+ * Standard card layouts rendered through <ServiceCard />.
+ */
 export type StandardCardLayout =
   | "description"
   | "simple-left"
   | "simple-center"
+  | "small-card"
   | "info-image"
   | "project";
+
+/**
+ * Featured layouts rendered by dedicated large-card components.
+ */
 export type FeaturedCardLayout = "info-big-image" | "big-image";
 export type CardLayout = StandardCardLayout | FeaturedCardLayout;
 
+/**
+ * Common card fields used by all card variants.
+ */
 type BaseCardData = {
   id: string;
   title: string;
@@ -75,3 +90,11 @@ export const isFeaturedCard = (card: CardData): card is FeaturedCardData =>
 export const isProjectCard = (
   card: StandardCardData,
 ): card is ProjectCardData => card.cardLayout === "project";
+
+/**
+ * Type guard for the compact About-page card style.
+ */
+export const isSmallCard = (
+  card: StandardCardData,
+): card is StandardCardData & { cardLayout: "small-card" } =>
+  card.cardLayout === "small-card";
