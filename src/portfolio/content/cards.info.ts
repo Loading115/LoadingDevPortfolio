@@ -3,6 +3,7 @@ import {
   isFeaturedCard,
   type CardData,
   type FeaturedCardData,
+  type ProjectCardData,
   type StandardCardData,
 } from "@/portfolio/components/card/card.types";
 
@@ -163,6 +164,11 @@ export const cardsBySection = {
 
 export type CardsSection = keyof typeof cardsBySection;
 
+export type ProjectDetailsData = Pick<
+  FeaturedCardData,
+  "id" | "title" | "description" | "imageSrc" | "label" | "tags" | "link"
+>;
+
 /**
  * Returns all cards configured for a specific section.
  */
@@ -197,4 +203,39 @@ export const getFeaturedCardBySection = (
   }
 
   return cards.find(isFeaturedCard);
+};
+
+const hasProjectDetails = (
+  card: CardData,
+): card is FeaturedCardData | ProjectCardData =>
+  Boolean(
+    card.link &&
+      card.imageSrc &&
+      card.description &&
+      card.label &&
+      card.tags?.length,
+  );
+
+export const getProjectDetailsBySlug = (
+  projectSlug: string,
+): ProjectDetailsData | undefined => {
+  const targetPath = `/projects/${projectSlug}`;
+  const projectCard = projectsCardsData.find(
+    (card): card is FeaturedCardData | ProjectCardData =>
+      hasProjectDetails(card) && card.link === targetPath,
+  );
+
+  if (!projectCard) {
+    return undefined;
+  }
+
+  return {
+    id: projectCard.id,
+    title: projectCard.title,
+    description: projectCard.description,
+    imageSrc: projectCard.imageSrc,
+    label: projectCard.label,
+    tags: projectCard.tags,
+    link: projectCard.link,
+  };
 };

@@ -1,34 +1,20 @@
-import { CardsGrid } from "@/portfolio/components/card/CardsGrid";
-import { FeaturedCardSection } from "@/portfolio/components/card/FeaturedCardSection";
-import { PageSection } from "@/portfolio/components/section/PageSection";
-import { SectionHeader } from "@/portfolio/components/section/SectionHeader";
-import {
-  getFeaturedCardBySection,
-  getGridCardsBySection,
-} from "@/portfolio/content/cards.info";
-import { projectsSectionContent } from "@/portfolio/components/projects/projects.sections";
+import { ProjectsCollectionSection } from "@/portfolio/components/projects/ProjectsCollectionSection";
+import { PageHeaderSection } from "@/portfolio/components/section/PageHeaderSection";
+import { projectsPageHeaderContent } from "@/portfolio/content/projects.page";
 
+/**
+ * Projects route composed from reusable sections.
+ * Data selection now lives inside the section layer instead of the page entry.
+ */
 export const ProjectsPage = () => {
-  const featuredCard = getFeaturedCardBySection("projects");
-  const projectCards = getGridCardsBySection("projects");
-
   return (
-    <PageSection>
-      <SectionHeader
-        title="Mis Proyectos"
-        subtitle="Explora los juegos en los que he estado trabajando"
-        align="left"
-        titleAs="h1"
-        className="mb-16"
+    <>
+      <PageHeaderSection
+        title={projectsPageHeaderContent.title}
+        subtitle={projectsPageHeaderContent.subtitle}
       />
 
-      <FeaturedCardSection card={featuredCard} className="mb-10" />
-      <SectionHeader
-        title={projectsSectionContent.titleText}
-        align="left"
-        className="mb-16"
-      />
-      <CardsGrid cards={projectCards} columns={3} variant="project" />
-    </PageSection>
+      <ProjectsCollectionSection />
+    </>
   );
 };

@@ -1,15 +1,20 @@
-import { PageSection } from "@/portfolio/components/section/PageSection";
-import { SectionHeader } from "@/portfolio/components/section/SectionHeader";
+import { DevlogContentSection } from "@/portfolio/components/devlog/DevlogContentSection";
+import { PageHeaderSection } from "@/portfolio/components/section/PageHeaderSection";
+import { devlogPageHeaderContent } from "@/portfolio/content/devlog.page";
 
+/**
+ * Devlog route composed from high-level sections only.
+ * Rendering details for updates and videos live in dedicated section components.
+ */
 export const DevlogPage = () => {
   return (
-    <PageSection>
-      <SectionHeader
-        title="Devlog"
-        subtitle="Sigueme en mi viaje de desarrollo y descubre el proceso detras de mis juegos"
-        align="left"
-        titleAs="h1"
+    <>
+      <PageHeaderSection
+        title={devlogPageHeaderContent.title}
+        subtitle={devlogPageHeaderContent.subtitle}
       />
-    </PageSection>
+
+      <DevlogContentSection />
+    </>
   );
 };

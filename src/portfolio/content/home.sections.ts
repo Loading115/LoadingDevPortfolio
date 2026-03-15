@@ -1,6 +1,8 @@
+import { siteConfig } from "@/portfolio/content/site";
+
 export const homeHeroContent = {
-  badgeText: "Indie Game Developer",
-  title: "Transformando Ideas en Experiencias Jugables",
+  badgeText: siteConfig.tagline,
+  title: siteConfig.description,
   highlightedText: "Experiencias Jugables",
   description:
     "Soy un desarrollador indie apasionado por crear juegos unicos y memorables. Combino creatividad, codigo y arte para dar vida a mundos interactivos que inspiran y entretienen.",

@@ -1,9 +1,12 @@
+import { cn } from "@/lib/utils";
 import { PageSection } from "@/portfolio/components/section/PageSection";
 import { SectionHeader } from "@/portfolio/components/section/SectionHeader";
+import { getAccentHoverCardClass } from "@/portfolio/components/card/card.styles";
 import {
   technicalSkillsData,
   type TechnicalSkillData,
 } from "@/portfolio/content/about.skills";
+import { aboutTechnicalSkillsSectionContent } from "@/portfolio/content/about.page";
 
 /**
  * Props for the technical skills section.
@@ -11,6 +14,7 @@ import {
  */
 type AboutTechnicalSkillsSectionProps = {
   skills?: readonly TechnicalSkillData[];
+  title?: string;
 };
 
 /**
@@ -19,11 +23,12 @@ type AboutTechnicalSkillsSectionProps = {
  */
 export const AboutTechnicalSkillsSection = ({
   skills = technicalSkillsData,
+  title = aboutTechnicalSkillsSectionContent.title,
 }: AboutTechnicalSkillsSectionProps) => {
   return (
     <PageSection withTopSeparator spacing="compact">
       <SectionHeader
-        title="Habilidades Tecnicas"
+        title={title}
         align="center"
         titleAs="h2"
         className="mb-12"
@@ -36,7 +41,10 @@ export const AboutTechnicalSkillsSection = ({
           return (
             <article
               key={skill.id}
-              className="rounded-2xl border border-border bg-card px-6 py-5"
+              className={cn(
+                "group rounded-2xl border border-border/80 bg-card px-6 py-5",
+                getAccentHoverCardClass("primary"),
+              )}
             >
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">

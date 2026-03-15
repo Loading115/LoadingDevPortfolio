@@ -1,15 +1,15 @@
-import { PageSection } from "@/portfolio/components/section/PageSection";
-import { SectionHeader } from "@/portfolio/components/section/SectionHeader";
+import { ContactContentSection } from "@/portfolio/components/contact/ContactContentSection";
+import { ContactHeroSection } from "@/portfolio/components/contact/ContactHeroSection";
 
+/**
+ * Contact route kept intentionally small so future contact-specific sections
+ * can be added without mixing content concerns into the route component.
+ */
 export const ContactPage = () => {
   return (
-    <PageSection>
-      <SectionHeader
-        title="Contacto"
-        subtitle="Tienes una idea de juego o quieres colaborar? Me encantaria escuchar de ti"
-        align="center"
-        titleAs="h1"
-      />
-    </PageSection>
+    <>
+      <ContactHeroSection />
+      <ContactContentSection />
+    </>
   );
 };

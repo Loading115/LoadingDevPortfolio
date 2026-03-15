@@ -1,17 +1,23 @@
 import { Flame } from "lucide-react";
-import { Link } from "react-router";
-import { SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
+import { Link } from "react-router-dom";
+import { siteConfig } from "@/portfolio/content/site";
 
-//Personal logo that is used on the application
 export const BrandLogo = () => {
   return (
-    <Link to="/" className="flex items-center gap-3">
-      <div className="bg-white rounded-lg p-2">
-        <Flame className="w-8 h-8 text-primary" />
+    <Link
+      to="/"
+      className="flex items-center gap-3"
+      aria-label={`${siteConfig.name} inicio`}
+    >
+      <div className="rounded-lg bg-white p-2">
+        <Flame className="h-8 w-8 text-primary" />
       </div>
+
       <div>
-        <h1 className="text-white text-2xl font-bold">{SITE_NAME}</h1>
-        <p className="text-white/80 text-sm">{SITE_TAGLINE}</p>
+        <span className="block text-2xl font-bold text-white">
+          {siteConfig.name}
+        </span>
+        <p className="text-sm text-white/80">{siteConfig.tagline}</p>
       </div>
     </Link>
   );

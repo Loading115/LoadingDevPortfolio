@@ -26,3 +26,10 @@ export const aboutHistoryMedia = {
   alt: "Laptop con codigo en una mesa de trabajo",
   badgeText: "5+ Anos",
 } as const;
+
+/**
+ * Heading used by the technical skills section on the About page.
+ */
+export const aboutTechnicalSkillsSectionContent = {
+  title: "Habilidades Tecnicas",
+} as const;

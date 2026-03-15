@@ -1,25 +1,26 @@
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { getAccentHoverCardClass } from "./card.styles";
 import { isSmallCard, type StandardCardData } from "./card.types";
 
 /**
  * Shared container styles for default service-card layouts.
  */
 const serviceCardVariants = cva(
-  "bg-card rounded-lg border border-border transition-colors transition-shadow",
+  "group rounded-2xl border border-border/80 bg-card",
   {
     variants: {
       tone: {
-        primary: "hover:border-primary",
-        secondary: "hover:border-secondary",
+        primary: "",
+        secondary: "",
       },
       align: {
         left: "text-left",
         center: "text-center",
       },
       size: {
-        default: "p-8 hover:shadow-lg",
-        small: "p-4 hover:shadow-sm",
+        default: "p-8",
+        small: "p-4",
       },
     },
     defaultVariants: {
@@ -74,7 +75,10 @@ export const ServiceCard = (card: StandardCardData) => {
   return (
     <article
       data-card-id={id}
-      className={serviceCardVariants({ tone, align, size: "default" })}
+      className={cn(
+        serviceCardVariants({ tone, align, size: "default" }),
+        getAccentHoverCardClass(tone),
+      )}
     >
       {imageSrc ? (
         <img
@@ -87,7 +91,7 @@ export const ServiceCard = (card: StandardCardData) => {
       {Icon ? (
         <div
           className={cn(
-            "w-16 h-16 rounded-lg flex items-center justify-center mb-4",
+            "mb-4 flex h-16 w-16 items-center justify-center rounded-lg",
             tone === "secondary" ? "bg-secondary/15" : "bg-muted",
             align === "center" ? "mx-auto" : ""
           )}

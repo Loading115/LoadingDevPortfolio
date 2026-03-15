@@ -7,7 +7,7 @@ import { isProjectCard, type StandardCardData } from "./card.types";
  * Generic grid renderer for standard and project card collections.
  */
 type CardsGridProps = {
-  cards: StandardCardData[];
+  cards: readonly StandardCardData[];
   columns?: 1 | 2 | 3;
   variant?: "service" | "project";
   className?: string;

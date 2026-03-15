@@ -1,6 +1,9 @@
 import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { TagList } from "@/portfolio/components/tag/TagList";
+import { cn } from "@/lib/utils";
+import { getAccentHoverCardClass } from "./card.styles";
 import type { ProjectCardData } from "./card.types";
 
 export const ProjectCard = ({
@@ -16,7 +19,10 @@ export const ProjectCard = ({
   return (
     <article
       data-card-id={id}
-      className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col"
+      className={cn(
+        "flex h-full flex-col overflow-hidden rounded-2xl border border-border/80 bg-card",
+        getAccentHoverCardClass(),
+      )}
     >
       <img src={imageSrc} alt={title} className="w-full h-64 object-cover" />
 
@@ -32,16 +38,7 @@ export const ProjectCard = ({
           {description}
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-6 min-h-[44px]">
-          {tags.map((tag) => (
-            <span
-              key={`${id}-${tag}`}
-              className="rounded-full border border-border px-3 py-1 text-sm font-medium text-foreground"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        <TagList tags={tags} keyPrefix={id} className="mb-6 min-h-[52px]" />
 
         <Button
           asChild

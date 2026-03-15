@@ -1,6 +1,9 @@
 import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { TagList } from "@/portfolio/components/tag/TagList";
+import { cn } from "@/lib/utils";
+import { getAccentHoverCardClass } from "./card.styles";
 import type { FeaturedCardData } from "./card.types";
 
 export const FeaturedProjectCard = ({
@@ -12,11 +15,15 @@ export const FeaturedProjectCard = ({
   tags,
   link,
   buttonText,
+  color = "primary",
 }: FeaturedCardData) => {
   return (
     <article
       data-card-id={id}
-      className="relative overflow-hidden rounded-xl border border-secondary min-h-[520px] md:min-h-[620px] shadow-2xl"
+      className={cn(
+        "relative min-h-[520px] overflow-hidden rounded-xl border border-border/80 shadow-2xl md:min-h-[620px]",
+        getAccentHoverCardClass(color),
+      )}
     >
       {/* Background image is rendered as CSS to avoid layout shifts. */}
       <div
@@ -36,16 +43,12 @@ export const FeaturedProjectCard = ({
             {description}
           </p>
 
-          <div className="flex flex-wrap gap-3 mb-8">
-            {tags.map((tag) => (
-              <span
-                key={`${id}-${tag}`}
-                className="text-sm font-semibold px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          <TagList
+            tags={tags}
+            tone="inverse"
+            keyPrefix={id}
+            className="mb-8"
+          />
 
           <Button
             asChild
